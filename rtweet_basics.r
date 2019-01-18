@@ -1,15 +1,19 @@
-#Search all tweets
-rt <- search_tweets(
-  q = "#rstats",
-  n = 25,
-  include_rts = FALSE
-)
+library(plyr)
+library(dplyr)
+library(rtweet)
+
+# #Search all tweets
+ rt <- search_tweets(
+   q = "#rstats",
+   n = 25,
+   include_rts = FALSE
+ )
 
 #Search a timeline
-tl <- get_timeline(
-  user = "@Lin_Manuel",
-  n = 5000
-)
+ tl <- get_timeline(
+   user = "@Lin_Manuel",
+   n = 5000
+ )
 
 text_only <- tl$text
 
