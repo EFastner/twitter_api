@@ -13,16 +13,16 @@ fun.find_tweet_string <- function(df, tweet_string){
     )
   
   if(tolower(tweet_string) == "gmorning"){
-  df.gmorning_tweet <- 
+  df.found_tweets <- 
     df.possible_tweets %>%
     dplyr::filter(df.possible_tweets$created_at == min(df.possible_tweets$created_at))
   }else if(tolower(tweet_string) == "gnight") {
-    df.gmorning_tweet <- 
+    df.found_tweets <- 
       df.possible_tweets %>%
       dplyr::filter(df.possible_tweets$created_at == max(df.possible_tweets$created_at))  
   }
   
-  return(df.gmorning_tweet)
+  return(df.found_tweets)
 }
 
 #If the tl variable doesn't exist in the current environment, query it from Twitter
