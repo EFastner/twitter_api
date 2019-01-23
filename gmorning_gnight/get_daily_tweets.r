@@ -116,6 +116,14 @@ hamilthoughts <-
 db.conn <- fun.postgres_connect("gmorning_gnight", PASSWORD, USERNAME)
 
 #Add ALL 3 DATA SETS TO THEIR RELEVANT TABLES
-fun.append_table(db.conn, "gmorning", gmorning)
-fun.append_table(db.conn, "gnight", gnight)
-fun.append_table(db.conn, "hamilthoughts", hamilthoughts)
+if(nrow(gmorning) > 0){
+  fun.append_table(db.conn, "gmorning", gmorning)
+}
+
+if(nrow(gnight) > 0){
+  fun.append_table(db.conn, "gnight", gnight)
+}
+
+if(nrow(hamilthoughts) > 0){
+  fun.append_table(db.conn, "hamilthoughts", hamilthoughts)
+}
