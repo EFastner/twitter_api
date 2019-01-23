@@ -76,12 +76,10 @@ fun.append_table <- function(connection, table, values){
                row.names = FALSE)
 }
 
-#If the tl variable doesn't exist in the current environment, query it from Twitter
-if(!exists("tl")) {
-  #Search a timeline
-  tl <- fun.get_tweets()
-  tl$date <- as.Date(tl$created_at)
-}
+#Search a timeline
+tl <- fun.get_tweets() #Get tweets
+tl$created_at <- tl$created_at - (60*60*6) #Subtract 6 hours to change to central time zone
+tl$date <- as.Date(tl$created_at) #Create column with date only
 
 #FILTER OUT THE PREVIOUS DATE ONLY
 df.single_date <- fun.filter_date(tl, Sys.Date()-1)
@@ -113,7 +111,7 @@ hamilthoughts <-
   filter(str_detect(df.single_date$text, fixed("Hamilthought", ignore_case = TRUE)))
 
 #CREATE DATABASE CONNECTION - MAKE SURE TO ADD USERNAME AND PASSWORD INTO CODE BEFORE ACTIVATING
-db.conn <- fun.postgres_connect("gmorning_gnight", PASSWORD, USERNAME)
+db.conn <- fun.postgres_connect("gmorning_gnight", HOST, USERNAME)
 
 #Add ALL 3 DATA SETS TO THEIR RELEVANT TABLES
 if(nrow(gmorning) > 0){
