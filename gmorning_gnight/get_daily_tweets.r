@@ -2,6 +2,7 @@ require(stringr)
 require(plyr)
 require(dplyr)
 require(rtweet)
+require(RPostgreSQL)
 
 fun.get_tweets <- function(){
   return(
